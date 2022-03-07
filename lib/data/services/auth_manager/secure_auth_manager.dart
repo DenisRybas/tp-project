@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 
 const _uidKey = 'UID_KEY';
 
-@LazySingleton(as: AuthManager)
+@Injectable(as: AuthManager)
 class SecureAuthManager implements AuthManager {
   final FlutterSecureStorage _secureStorage;
 

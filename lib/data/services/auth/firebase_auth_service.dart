@@ -2,7 +2,7 @@ import 'package:cloud_chat/domain/services/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: AuthService)
+@Injectable(as: AuthService)
 class FirebaseAuthService implements AuthService {
   final FirebaseAuth _firebaseAuth;
 
@@ -20,4 +20,7 @@ class FirebaseAuthService implements AuthService {
   @override
   Future logout() => _firebaseAuth.signOut();
 
+  @override
+  Future signUpWithEmail(String email, String password) =>
+    _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
 }

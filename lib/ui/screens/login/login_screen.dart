@@ -29,7 +29,7 @@ class LoginScreen extends BaseScreen<LoginViewModel> {
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: const [
@@ -54,7 +54,7 @@ class LoginScreen extends BaseScreen<LoginViewModel> {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -92,6 +92,13 @@ class LoginScreen extends BaseScreen<LoginViewModel> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: Dimens.padding24),
+                  child: TextButton(
+                    onPressed: () => Navigator.pushNamed(context, Routes.registration),
+                    child: Text(Strings.login.signUpButton),
+                  ),
+                ),
               ],
             ),
           ),
@@ -101,12 +108,15 @@ class LoginScreen extends BaseScreen<LoginViewModel> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                BaseTextButton(text: Strings.login.loginButton, onTap: () async {
-                  final resOk = await viewModel.signIn();
-                  if (resOk) {
-                    Navigator.pushReplacementNamed(context, Routes.home);
-                  }
-                },)
+                BaseTextButton(
+                  text: Strings.login.loginButton,
+                  onTap: () async {
+                    final resOk = await viewModel.signIn();
+                    if (resOk) {
+                      Navigator.pushReplacementNamed(context, Routes.home);
+                    }
+                  },
+                )
               ],
             ),
           )

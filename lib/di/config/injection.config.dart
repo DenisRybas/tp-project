@@ -18,11 +18,13 @@ import '../../ui/stores/home/home_store.dart' as _i11;
 import '../../ui/stores/home/home_view_model.dart' as _i10;
 import '../../ui/stores/login/login_store.dart' as _i13;
 import '../../ui/stores/login/login_view_model.dart' as _i12;
-import '../../ui/stores/splash/splash_store.dart' as _i15;
-import '../../ui/stores/splash/splash_view_model.dart' as _i14;
-import '../modules/firebase_module.dart' as _i16;
+import '../../ui/stores/registration/registration_store.dart' as _i15;
+import '../../ui/stores/registration/registration_view_model.dart' as _i14;
+import '../../ui/stores/splash/splash_store.dart' as _i17;
+import '../../ui/stores/splash/splash_view_model.dart' as _i16;
+import '../modules/firebase_module.dart' as _i18;
 import '../modules/secure_storage_module.dart'
-    as _i17; // ignore_for_file: unnecessary_lambdas
+    as _i19; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -34,21 +36,23 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i3.FirebaseAuth>(() => firebaseModule.firebaseAuth);
   gh.lazySingleton<_i4.FlutterSecureStorage>(
       () => secureStorageModule.secureStorage);
-  gh.lazySingleton<_i5.AuthManager>(
+  gh.factory<_i5.AuthManager>(
       () => _i6.SecureAuthManager(get<_i4.FlutterSecureStorage>()));
-  gh.lazySingleton<_i7.AuthService>(
+  gh.factory<_i7.AuthService>(
       () => _i8.FirebaseAuthService(get<_i3.FirebaseAuth>()));
-  gh.factory<_i9.AuthInteractor>(
+  gh.lazySingleton<_i9.AuthInteractor>(
       () => _i9.AuthInteractor(get<_i7.AuthService>(), get<_i5.AuthManager>()));
   gh.factory<_i10.HomeViewModel>(
       () => _i11.HomeStore(get<_i9.AuthInteractor>()));
   gh.factory<_i12.LoginViewModel>(
       () => _i13.LoginStore(get<_i9.AuthInteractor>()));
-  gh.factory<_i14.SplashViewModel>(
-      () => _i15.SplashStore(get<_i9.AuthInteractor>()));
+  gh.factory<_i14.RegistrationViewModel>(
+      () => _i15.RegistrationStore(get<_i9.AuthInteractor>()));
+  gh.factory<_i16.SplashViewModel>(
+      () => _i17.SplashStore(get<_i9.AuthInteractor>()));
   return get;
 }
 
-class _$FirebaseModule extends _i16.FirebaseModule {}
+class _$FirebaseModule extends _i18.FirebaseModule {}
 
-class _$SecureStorageModule extends _i17.SecureStorageModule {}
+class _$SecureStorageModule extends _i19.SecureStorageModule {}
