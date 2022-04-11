@@ -1,0 +1,6 @@
+Flask~=1.1.2
+Flask-Babel
+requests~=2.25.1
+cloudinary
+flask-cors
+flask-talisman
