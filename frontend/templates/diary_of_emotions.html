@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{{ _('diary_of_emotions') }}{% endblock %}
+
+{% block content %}
+{#    {% if session['logged_in']%}#}
+<div class="container col-xxl-8 px-2 py-2 bg-white">
+          <form>
+              <h2 class="benefits__title">
+                    <img src="/static/img/svg/Subtract.png" alt="Diary_of_emotions:" class="benefits__card-thumb">
+                    Choose from the list the emotions that you experienced today:
+                </h2>
+              <div class="card mb-3 shadow-lg ">
+                   <div class="card-body">
+                       <ul class="diary__title">
+                           <label class="container" for="interest_1">  {{ _('Радость ') }}
+                            <input type="checkbox" id="interest_1" value="interest_1" name="user_interest" class="check-highload">
+                            <span class="highload2"></span>
+                            </label>
+                       </ul>
+                   </div>
+              </div>
+
+                <div class="card mb-3 shadow-lg ">
+                   <div class="card-body">
+                       <ul class="diary__title">
+                           <label class="container" for="interest_2"> {{ _('Злость ') }}
+                            <input type="checkbox" id="interest_2" value="interest_2" name="user_interest" class="check-highload">
+                            <span class="highload2"></span>
+                            </label>
+                       </ul>
+                   </div>
+              </div>
+
+                <div class="card mb-3 shadow-lg ">
+                   <div class="card-body">
+                       <ul class="diary__title">
+                           <label class="container" for="interest_3">  {{ _('Смех') }}
+                            <input type="checkbox" id="interest_3" value="interest_3" name="user_interest" class="check-highload">
+                            <span class="highload2"></span>
+                            </label>
+                       </ul>
+                   </div>
+              </div>
+
+                <div class="card mb-3 shadow-lg ">
+                   <div class="card-body">
+                       <ul class="diary__title">
+                           <label class="container" for="interest_4"> {{ _('Гнев') }}
+                            <input type="checkbox" id="interest_4" value="interest_4" name="user_interest" class="check-highload">
+                            <span class="highload2"></span>
+                            </label>
+                       </ul>
+                   </div>
+              </div>
+              <div class="buttons">
+                <button class="floating-button" type="submit">{{ _('Save') }}</button>
+                <a class="floating-button" href="{{ url_for('diary_of_emotions_actions') }}"> Next page</a>
+              </div>
+          </form>
+</div>
+
+{#   {% else %}#}
+
+{#      {% endif %}#}
+{% endblock %}
