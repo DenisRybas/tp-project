@@ -1,6 +1,5 @@
 # Awareness
-
-Мобильное приложение для повышения самоосознанности
+Web приложение для повышения самоосознанности
 
 ## Ссылки на документацию
 1. ТЗ (на google docs) - https://docs.google.com/document/d/1NipqQFWCcU3OZ01HnjD0rYgtypdP8TreYHVrZGUc-Uw/edit?usp=sharing
