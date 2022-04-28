@@ -554,6 +554,16 @@ img{
     line-height: 42px;
     padding: 93px 100px 88px 100px;
 }
+.benefits__title_theme_templates{
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 42px;
+    padding: 50px 50px;
+    margin:0 auto;
+}
+
 .link1 {
      display: block; /* Ссылка как блочный элемент */
      text-align: left; /* Выравнивание по центру */
@@ -733,5 +743,31 @@ img{
     height: 100%;
     z-index: 4;
 }
-
+.button_tem{
+   height: 50px;
+   display:block;
+   position: relative;
+   border: 10px solid white;
+   margin:0 auto;
+   /*padding-top:10px;*/
+}
+.floating-button {
+  text-decoration: none;
+  display: inline-block;
+  width: 140px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  margin: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #524f4e;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+  transition: .3s;
+}
 /* Places styles end */
