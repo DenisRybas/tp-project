@@ -8,3 +8,4 @@ Web приложение для повышения самоосознаннос�
 4. Trello - https://trello.com/b/xj4X9HxR/тп-2022
 5. Курсовая работа (на GitHub) - https://github.com/SP-organization/Awareness/blob/prod/docs/Курсовая.pdf
 6. Ссылка на приложение - https://eternal-awareness.herokuapp.com/
+7. Swagger - https://github.com/SP-organization/Awareness/blob/prod/docs/swagger.png
