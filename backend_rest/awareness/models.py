@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import jwt
-from backend.awareness.app import db, app
+from backend_rest.awareness.app import db, app
 
 
 class User(db.Model):

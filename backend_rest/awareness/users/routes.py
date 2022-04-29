@@ -3,11 +3,11 @@ from functools import wraps
 
 from flask import url_for, Blueprint, request, jsonify, session
 
-from backend.awareness.app import db, app
-from backend.awareness.models import User
+from backend_rest.awareness.app import db, app
+from backend_rest.awareness.models import User
 from flask import current_app
 from werkzeug.security import check_password_hash, generate_password_hash
-from backend.awareness.users.email import SmtpEmail
+from backend_rest.awareness.users.email import SmtpEmail
 import jwt
 
 users_blueprint = Blueprint("users", __name__)

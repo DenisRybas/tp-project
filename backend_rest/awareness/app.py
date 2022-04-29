@@ -27,10 +27,10 @@ swagger = Swagger(app)
 def create_app():
     db.init_app(app)
 
-    from backend.awareness.users.routes import users_blueprint
+    from backend_rest.awareness.users.routes import users_blueprint
 
     # from awareness.diaries.routes import diaries
-    from backend.awareness.template_diaries.routes import template_diaries_blueprint
+    from backend_rest.awareness.template_diaries.routes import template_diaries_blueprint
 
     app.register_blueprint(users_blueprint)
     app.register_blueprint(template_diaries_blueprint)
