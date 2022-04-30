@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ _('My Diary') }}{% endblock %}
+{% block title %}{{ 'My Diary' }}{% endblock %}
 
 {% block content %}
  <style>
@@ -30,10 +30,10 @@
                 <div class="mt-2 nav ps-2 flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
                      aria-orientation="vertical">
                     <a class="w-100 btn btn-lg btn-secondary text-light" href="{{ url_for('my_diary_page') }}"
-                       aria-selected="true">{{ _('My Diary') }}
+                       aria-selected="true">{{ 'My Diary' }}
                     </a>
                     <a class="nav-link btn btn-lg remove-glow" href="{{ url_for('settings_page') }}"
-                       aria-selected="false">{{ _('Settings') }}
+                       aria-selected="false">{{ 'Settings' }}
                     </a>
                 </div>
                 <div class="d-flex flex-column flex-grow-1 ms-5">
@@ -41,7 +41,7 @@
                         <div  class="card mb-3 shadow-lg ">
                             <div class="card-body">
                                 <ul class="diary__title">
-                                    <a class="link_list_diary" href="{{ url_for('diary_of_templates') }}"> Diary of template </a>
+                                    <a class="link_list_diary" href="{{ url_for('template_diaries.get_all_template_diaries') }}"> Diary of template </a>
                                 </ul>
                             </div>
 
@@ -49,14 +49,14 @@
                         <div class="card mb-3 shadow-lg ">
                               <div class="card-body">
                                   <ul class="diary__title">
-                                    <a class="link_list_diary" href="{{ url_for('diary_of_emotions') }}"> Diary of emotions</a>
+                                    <a class="link_list_diary" href="{{ url_for('emotion_diaries') }}"> Diary of emotions</a>
                                   </ul>
                             </div>
                         </div>
                         <div class="card mb-3 shadow-lg ">
                               <div class="card-body">
                                   <ul class="diary__title">
-                                     <a class="link_list_diary" href="{{ url_for('diary_of_situations') }}">Diary of situations</a>
+                                     <a class="link_list_diary" href="{{ url_for('situation_diaries') }}">Diary of situations</a>
                                   </ul>
                             </div>
                         </div>
