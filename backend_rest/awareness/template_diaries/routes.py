@@ -53,15 +53,17 @@ def create_template_diary():
     """
     if request.method == "POST":
         diary_json = request.get_json(force=True)
-        theme_1 = Theme.get_by_theme(diary_json['theme_1'])
-        theme_2 = Theme.get_by_theme(diary_json['theme_2'])
+        theme_1 = Theme.get_by_theme(diary_json["theme_1"])
+        theme_2 = Theme.get_by_theme(diary_json["theme_2"])
 
-        user_id = User.decode_auth_token(request.args.get('token'))
+        user_id = User.decode_auth_token(request.args.get("token"))
 
-        diary_1 = UserTemplateDiary(user_id=int(user_id),
-                                    theme_id=theme_1.id, answer=diary_json['answer_1'])
-        diary_2 = UserTemplateDiary(user_id=int(user_id),
-                                    theme_id=theme_2.id, answer=diary_json['answer_2'])
+        diary_1 = UserTemplateDiary(
+            user_id=int(user_id), theme_id=theme_1.id, answer=diary_json["answer_1"]
+        )
+        diary_2 = UserTemplateDiary(
+            user_id=int(user_id), theme_id=theme_2.id, answer=diary_json["answer_2"]
+        )
         db.session.add(diary_1)
         db.session.add(diary_2)
         db.session.commit()
@@ -74,4 +76,3 @@ def create_template_diary():
         theme_2 = Theme.query.get(theme_2_id)
         return jsonify(theme_1=theme_1, theme_2=theme_2), 200
     return None
-

@@ -47,12 +47,12 @@ class User(db.Model):
         :return: integer|string
         """
         try:
-            payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'))
-            return payload['uid']
+            payload = jwt.decode(auth_token, app.config.get("SECRET_KEY"))
+            return payload["uid"]
         except jwt.ExpiredSignatureError:
-            return 'Signature expired. Please log in again.'
+            return "Signature expired. Please log in again."
         except jwt.InvalidTokenError:
-            return 'Invalid token. Please log in again.'
+            return "Invalid token. Please log in again."
 
     def get_user_token(self, expires_sec=1800):
         s = Serializer(current_app.config["SECRET_KEY"], expires_sec)

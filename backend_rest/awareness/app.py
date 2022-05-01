@@ -30,7 +30,9 @@ def create_app():
     from backend_rest.awareness.users.routes import users_blueprint
 
     # from awareness.diaries.routes import diaries
-    from backend_rest.awareness.template_diaries.routes import template_diaries_blueprint
+    from backend_rest.awareness.template_diaries.routes import (
+        template_diaries_blueprint,
+    )
 
     app.register_blueprint(users_blueprint)
     app.register_blueprint(template_diaries_blueprint)
