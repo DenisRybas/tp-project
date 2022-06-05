@@ -9,11 +9,11 @@ app.config["SECRET_KEY"] = "Fatmans"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///awareness.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["DEBUG"] = True
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587
+app.config["MAIL_SERVER"] = "smtp.rambler.ru"
+app.config["MAIL_PORT"] = 465
 app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = "noreply.fatmans.team@gmail.com"
-app.config["MAIL_PASSWORD"] = "ezqgj543"
+app.config["MAIL_USERNAME"] = "sp.awareness.noreply@rambler.ru"
+app.config["MAIL_PASSWORD"] = "WeWillGet50"
 
 db = SQLAlchemy(app)
 # __import__("awareness.models")
@@ -34,6 +34,11 @@ def create_app():
         template_diaries_blueprint,
     )
 
+    from backend_rest.awareness.situation_diaries.routes import (
+        situation_diaries_blueprint,
+    )
+
     app.register_blueprint(users_blueprint)
     app.register_blueprint(template_diaries_blueprint)
+    app.register_blueprint(situation_diaries_blueprint)
     return app
