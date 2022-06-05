@@ -47,7 +47,7 @@ class User(db.Model):
         :return: integer|string
         """
         try:
-            payload = jwt.decode(auth_token, app.config.get("SECRET_KEY"))
+            payload = jwt.decode(auth_token, app.config.get("SECRET_KEY"), ["HS256"])
             return payload["uid"]
         except jwt.ExpiredSignatureError:
             return "Signature expired. Please log in again."
@@ -150,10 +150,17 @@ class Emotion(db.Model):
     related_users = db.relationship("UserEmotion", backref="related_users", lazy=True)
 
 
+class Action(db.Model):
+    id = db.Column(db.Integer, nullable=False, primary_key=True)
+    action_name = db.Column(db.String(100), nullable=False)
+    related_users = db.relationship("UserEmotion", backref="related_users", lazy=True)
+
+
 class UserEmotion(db.Model):
     id = db.Column(db.Integer, nullable=False, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     emotion_id = db.Column(db.Integer, db.ForeignKey("emotion.id"), nullable=False)
+    action_id = db.Column(db.Integer, db.ForeignKey("action.id"), nullable=False)
     day_rate = db.Column(db.SmallInteger, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
@@ -175,6 +182,10 @@ class Situation(db.Model):
     related_situation_diary = db.relationship(
         "UserSituationDiary", backref="related_situation_diary", lazy=True
     )
+
+    @staticmethod
+    def get_by_situation(situation):
+        return Situation.query.filter_by(situation=situation).first()
 
 
 class UserSituationDiary(db.Model):
