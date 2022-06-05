@@ -722,16 +722,21 @@ img{
    margin:0 auto;
    /*padding-top:10px;*/
 }
-
 .buttons {
+ text-decoration: none; /* Убираем подчёркивание */
   text-align: center; /* центрируем элементы с display:inline-block; */
+}
+.buttons1 {
+  text-align: center; /* центрируем элементы с display:inline-block; */
+  float: right;
+  text-decoration: none; /* Убираем подчёркивание */
 }
 
 .floating-button {
-  text-decoration: none;
+
   display: inline-block;
-  width: 140px;
-  height: 45px;
+  width: 200px;
+  height: 60px;
   position: relative;
   line-height: 45px;
   border-radius: 45px;
@@ -747,6 +752,7 @@ img{
   box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
   transition: .3s;
   margin:0 auto;
+  text-decoration: none; /* Убираем подчёркивание */
 }
 /**/
 /* контейнер */

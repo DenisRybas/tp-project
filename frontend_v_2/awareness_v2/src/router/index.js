@@ -11,6 +11,8 @@ import DiaryOfTemplatesView from "@/views/DiaryOfTemplates.vue";
 import HabitTrackerView from "@/views/HabitTracker.vue";
 import DiaryOfEmotionsView from "@/views/DiaryOfEmotions.vue";
 import DiaryOfSituationsView from "@/views/DiaryOfSituations.vue";
+import TechnicalSupportUserView from "@/views/TechnicalSupportUser.vue";
+import MyAppealsView from "@/views/MyAppeals.vue";
 
 const routes = [
   {
@@ -84,6 +86,18 @@ const routes = [
     name: 'diary_of_situations',
     meta: {layout: 'main'},
     component: DiaryOfSituationsView
+  },
+          {
+    path: '/technical_support_user',
+    name: 'technical_support_user',
+    meta: {layout: 'main'},
+    component: TechnicalSupportUserView
+  },
+    {
+    path: '/my_appeals',
+    name: 'my_appeals',
+    meta: {layout: 'main'},
+    component: MyAppealsView
   },
 ]
 
