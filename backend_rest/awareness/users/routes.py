@@ -16,14 +16,15 @@ users_blueprint = Blueprint("users", __name__)
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = request.args.get("token")
+        token = request.headers['x-access-token']
 
         if not token:
             return jsonify(result="token is missing"), 403
 
         try:
-            jwt.decode(token, app.config["SECRET_KEY"])
-        except:
+            jwt.decode(token, app.config["SECRET_KEY"], ["HS256"])
+        except Exception as e:
+            print(e)
             return jsonify(result="token is invalid"), 403
 
         return f(*args, **kwargs)
@@ -70,7 +71,7 @@ def register():
     if request.method == "POST":
         user_json = request.get_json(force=True)
         if User.query.filter_by(email=user_json["email"]).first() is None:
-            sub = True if user_json["subscribed_on_daily_phrase"] == 1 else False
+            sub = user_json["subscribed_on_daily_phrase"] == 1
             user = User(
                 nickname=user_json["username"],
                 email=user_json["email"],
@@ -119,10 +120,10 @@ def login():
 
         auth = request.authorization
         if (
-            user
-            and user.confirmed
-            and auth
-            and check_password_hash(user.password, auth.password)
+                user
+                and user.is_confirmed
+                and auth
+                and check_password_hash(user.password, auth.password)
         ):
             token = jwt.encode(
                 {
@@ -131,8 +132,10 @@ def login():
                 },
                 app.config["SECRET_KEY"],
             )
+
+            print(token)
             session["logged_in"] = True
-            return jsonify(result="Login successful", token=token.decode("UTF-8")), 100
+            return jsonify(result="Login successful", token=token), 100
         else:
             return jsonify(result="Invalid password"), 417
     else:
@@ -151,11 +154,10 @@ def edit_account():
             type: string
             required: true
             example: Denis
-          - name: email
-            in: body
-            type: string
+          -subscribed_on_daily_phrase:
+            type: boolean
             required: true
-            example: example@example.com
+            example: 1
           - name: password
             in: body
             type: string
@@ -181,22 +183,17 @@ def edit_account():
           400:
             description: Invalid request method
     """
-    user_id = User.decode_auth_token(request.args.get("token"))
-    user = User.query.filter_by(user_id=user_id).first()
+    user_id = User.decode_auth_token(request.headers['x-access-token'])
+    user = User.query.filter_by(id=user_id).first()
     if request.method == "POST":
         user_json = request.get_json()
-        user_id = User.decode_auth_token(request.args.get("token"))
-        user = User.query.filter_by(user_id=user_id).first()
 
-        if user.email != user_json["email"]:
-            return jsonify(result="User has different email"), 403
-        else:
-            user.nickname = user_json["username"]
-            user.subscribed_on_daily_phrase = user_json["email"]
-            if user_json["password"] != "":
-                user.password = generate_password_hash(user_json["password"])
+        user.nickname = user_json["username"]
+        user.subscribed_on_daily_phrase = user_json["subscribed_on_daily_phrase"]
+        if user_json["password"] != "":
+            user.password = generate_password_hash(user_json["password"])
             db.session.commit()
-            return jsonify(result="Account edited successfully"), 100
+        return jsonify(result="Account edited successfully"), 100
     elif request.method == "GET":
         return (
             jsonify(
