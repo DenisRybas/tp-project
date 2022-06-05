@@ -19,6 +19,11 @@
                                 <button type="submit" class="floating-button">Save</button>
                         </div>
                     </form>
+                  <ul id="example-1">
+                        <li v-for="item in items" :key="item.message">
+                          {{ item.message }}
+                        </li>
+                  </ul>
                 </h2>
       </div>
 </template>
@@ -40,6 +45,7 @@ export default {
       const response = await axios.get("/diary_of_templates");
       this.theme1 = response.data["theme_1"];
       this.theme2 = response.data["theme_2"];
+      this.diary = response.data["theme_2"];
     },
 
      async submitHandler() {

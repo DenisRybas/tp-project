@@ -28,7 +28,7 @@
                         <p class="benefits__card-desc">
                             Here is a brief description of the diary
                         </p>
-                       <a class="link1"> Get started </a>
+                        <router-link class="a" to="/diary_of_emotions"> Get started</router-link>
                     </div>
                     <div class="benefits__card">
                         <div class="benefits__card-pic">
@@ -40,7 +40,7 @@
                         <p class="benefits__card-desc">
                             Here is a brief description of the diary
                         </p>
-                       <a class="link1"> Get started </a>
+                        <router-link class="a" to="/diary_of_situations"> Get started</router-link>
                     </div>
 
                      <div class="benefits__card">
@@ -53,7 +53,7 @@
                         <p class="benefits__card-desc">
                             Here is a brief description of the habit tracker
                         </p>
-                        <a class="link1"> Get started </a>
+                         <router-link class="a" to="/habit_tracker"> Get started</router-link>
                     </div>
                 </div>
             </div>

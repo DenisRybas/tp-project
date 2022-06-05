@@ -8,6 +8,9 @@ import AboutView from '../views/About.vue'
 import MyDiaryView from '../views/MyDiary.vue'
 import SettingsView from '../views/Settings.vue'
 import DiaryOfTemplatesView from "@/views/DiaryOfTemplates.vue";
+import HabitTrackerView from "@/views/HabitTracker.vue";
+import DiaryOfEmotionsView from "@/views/DiaryOfEmotions.vue";
+import DiaryOfSituationsView from "@/views/DiaryOfSituations.vue";
 
 const routes = [
   {
@@ -63,6 +66,24 @@ const routes = [
     name: 'diary_of_templates',
     meta: {layout: 'main'},
     component: DiaryOfTemplatesView
+  },
+      {
+    path: '/diary_of_emotions',
+    name: 'diary_of_emotions',
+    meta: {layout: 'main'},
+    component: DiaryOfEmotionsView
+  },
+       {
+    path: '/habit_tracker',
+    name: 'habit_tracker',
+    meta: {layout: 'main'},
+    component: HabitTrackerView
+  },
+       {
+    path: '/diary_of_situations',
+    name: 'diary_of_situations',
+    meta: {layout: 'main'},
+    component: DiaryOfSituationsView
   },
 ]
 

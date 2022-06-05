@@ -2,7 +2,7 @@
 <div class="container col-xxl-8 px-2 py-2 bg-white">
           <form>
               <h2 class="benefits__title">
-                    <img src="/static/img/svg/Subtract.png" alt="emotion_diaries:" class="benefits__card-thumb">
+                    <img src="/img/svg/Subtract.png" alt="emotion_diaries:" class="benefits__card-thumb">
                     Choose from the list the emotions that you experienced today:
                 </h2>
               <div class="card mb-3 shadow-lg ">
