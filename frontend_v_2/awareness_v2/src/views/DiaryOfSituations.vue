@@ -1,93 +1,99 @@
 <template>
   <h2 class="benefits__title">
- <img src="/img/svg/OpenBook.png" alt="Diary_of_situations" class="benefits__card-thumb">Diary of situations
+    <!--    <img src="/img/svg/OpenBook.png" alt="Diary_of_situations" class="benefits__card-thumb">-->
+    Дневник ситуаций
   </h2>
- <h2 class="benefits__title_theme_templates">
-   {{ question }}Test questions
- </h2>
-<div id="v-model-radiobutton" class="demo">
-    <div class="card mb-3 shadow-lg ">
-                   <div class="card-body">
-                       <ul class="diary__title">
-                           <input type="radio" id="test1" value="test1" v-model="picked" />
-                            <label for="test1">{{ test1 }}</label>
-                        <br />
-                       </ul>
-                   </div>
-    </div>
-      <div class="card mb-3 shadow-lg ">
-                   <div class="card-body">
-                       <ul class="diary__title">
-                             <input type="radio" id="test2" value="test2" v-model="picked" />
-                         <label for="test2">{{ test2 }}</label>
-                             <br />
-                       </ul>
-                   </div>
-    </div>
-      <div class="card mb-3 shadow-lg ">
-                   <div class="card-body">
-                       <ul class="diary__title">
-                         <input type="radio" id="test3" value="test3" v-model="picked" />
-                         <label for="test3">{{ test3 }}</label>
-                         <br />
-                       </ul>
-                   </div>
-    </div>
-    <span>Picked: {{ picked }}</span>
-  </div>
-  <div class="buttons">
-    <button type="submit" class="floating-button">Save</button>
-  </div>
-   <div class="buttons">
-    <button type="submit" class="floating-button">
-      <router-link to="/registration">Right answer</router-link></button>
-  </div>
+  <div class="container col-xxl-8 px-2 py-2 bg-white" @submit.prevent="submitHandler">
+    <h2 class="benefits__title_theme_templates">
+      {{ situation }}
+    </h2>
+    <div id="v-model-radiobutton" class="demo">
+      <h3>Варианты ответа:</h3>
+      <li v-for="situationWithAnswer in situationObj">
+        <div class="card mb-3 shadow-lg ">
+          <div class="card-body">
+            <ul class="diary__title">
+              <label class="container" :for="`situation_${situationWithAnswer.answer}`">
+                <input type="radio" :id="`situation_${situationWithAnswer.answer}`" :value="`${situationWithAnswer.answer}`"
+                       name="user_interest"
+                       v-model="answer">
 
+                <label for="`situation_${situationWithAnswer.answer}`"><h4>{{ situationWithAnswer.answer }}</h4></label>
+
+              </label>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <h3>Выбран: {{ answer }}</h3>
+    </div>
+    <h3 v-if="!isHidden">Правильный ответ: {{preferredAnswer}}</h3>
+    <div class="card-body">
+
+    </div>
+    <div class="buttons">
+      <button type="submit" class="floating-button" v-on:click="submitHandler">Сохранить</button>
+    </div>
+    <div class="buttons">
+      <button type="button" class="floating-button" v-on:click="isHidden = !isHidden">Правильный ответ</button>
+    </div>
+  </div>
 </template>
 
 <script>
-  import axios from "axios";
+import axios from "axios";
 
-  export default {
+export default {
   data() {
     return {
-      question:'',
-      picked: '',
-      test1: '',
-      test2: '',
-      test3: ''
+      situationObj: [],
+      situation: '',
+      answer: '',
+      preferredAnswer: '',
+      isHidden: true
     }
   },
-    methods: {
-    async created() {
-      // GET request using axios with async/await// исправить в зависисмости от url
-      const response = await axios.get("/diary_of_situations");
-      this.question = response.data["question"];
-      this.test1 = response.data["test1"];
-      this.test2 = response.data["test2"];
-      this.test3 = response.data["test3"];
-    },
-
-     async submitHandler() {
+  async created() {
+// GET request using axios with async/await// исправить в зависисмости от url
+    const response = await axios.get("http://127.0.0.1:8000/situation_diaries/new");
+    this.situationObj = response.data['situation'];
+    this.situation = response.data['situation'].situation;
+    this.preferredAnswer = response.data['preferred_answer'];
+    console.log(this.situationObj)
+  },
+  methods: {
+    async submitHandler() {
       let formData = {
-        picked: this.picked,
+        situation: this.situationObj[0].situation,
+        answer: this.answer
       }
-     axios.post('/diary_of_situations', formData)// исправить в зависисмости от url
-    .then(function (response) {
-        console.log(response);
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
+
+      console.log(1)
+      axios.post('http://127.0.0.1:8000/situation_diaries/new', formData)// исправить в зависисмости от url
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       console.log(formData)
 
       await this.$router.push('/')
     },
-  },
   }
+}
 </script>
 
 <style scoped>
+li {
+  list-style-type: none;
+}
 
+h4 {
+  margin-left: 30px;
+}
+
+h2 {
+  text-align: center
+}
 </style>
-

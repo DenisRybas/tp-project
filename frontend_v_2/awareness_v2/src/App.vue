@@ -8,6 +8,7 @@
 
 <script>
 import MainLayout from '@/layouts/MainLayout'
+
 export default {
   computed: {
     layout() {
@@ -15,7 +16,7 @@ export default {
     }
   },
   components: {
-     MainLayout
+    MainLayout,
   }
 }
 </script>

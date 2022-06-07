@@ -1,15 +1,15 @@
 <template>
-<body class="d-flex flex-column min-vh-100">
-    <Navbar/>
-    <main class="flex-grow-1">
-      <div class="app-page">
-        <body>
-        <router-view />
-        </body>
-      </div>
-    </main>
-    <Footer/>
-</body>
+  <body class="d-flex flex-column min-vh-100">
+  <Navbar/>
+  <main class="flex-grow-1">
+    <div class="app-page">
+      <body>
+      <router-view/>
+      </body>
+    </div>
+  </main>
+  <Footer/>
+  </body>
 </template>
 
 <script>

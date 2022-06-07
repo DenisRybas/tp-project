@@ -1,6 +1,7 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flasgger import Swagger
+from flask import Flask
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
 
 # from flask_migrate import Migrate
 
@@ -22,6 +23,7 @@ DATABASE_URI = getattr(app.config, "SQLALCHEMY_DATABASE_URI", "")
 is_sqlite = DATABASE_URI.startswith("sqlite:")
 # migrate.init_app(app, db, render_as_batch=is_sqlite)
 swagger = Swagger(app)
+CORS(app)
 
 
 def create_app():
@@ -38,7 +40,12 @@ def create_app():
         situation_diaries_blueprint,
     )
 
+    from backend_rest.awareness.emotion_diaries.routes import (
+        emotion_diaries_blueprint,
+    )
+
     app.register_blueprint(users_blueprint)
     app.register_blueprint(template_diaries_blueprint)
     app.register_blueprint(situation_diaries_blueprint)
+    app.register_blueprint(emotion_diaries_blueprint)
     return app

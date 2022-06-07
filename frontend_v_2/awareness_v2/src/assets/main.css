@@ -355,7 +355,7 @@ select {
 button,
 html input[type="button"],
 
-/* 1 */
+    /* 1 */
 
 input[type="reset"],
 input[type="submit"] {
@@ -496,6 +496,7 @@ textarea {
     color: #000;
     padding: 0.2em 0;
 }
+
 .form-signin1 {
     width: 100%;
     max-width: 330px;
@@ -503,19 +504,23 @@ textarea {
     margin: auto;
     align-items: center;
 }
-.modal1{
-  padding: 50px;
-  background: #ccc;
-  position: fixed; top: 50%; left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+
+.modal1 {
+    padding: 50px;
+    background: #ccc;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
 .carousel .carousel-item {
-  height: 500px;
+    height: 500px;
 }
 
 .bd-placeholder-img {

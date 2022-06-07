@@ -1,60 +1,60 @@
 <template>
-      <div class="container col-xxl-8 px-2 py-2 bg-white" @submit.prevent="submitHandler">
-                <h2 class="benefits__title">
-                    <img src="img/svg/Vector.png" alt="Diary of templates:" class="benefits__card-thumb"> Diary of templates
-                    <form>
-                    <h2 class="benefits__title_theme_templates">
-                        {{ theme1 }}
-                    </h2>
-                       <div class="input-field">
-                          <textarea v-model.trim="test1" placeholder="введите несколько строчек"></textarea>
-                       </div>
-                    <h2 class="benefits__title_theme_templates">
-                      {{ theme2 }}
-                    </h2>
-                        <div class="input-field">
-                              <textarea v-model.trim="test2" placeholder="введите несколько строчек"></textarea>
-                       </div>
-                        <div class="buttons">
-                                <button type="submit" class="floating-button">Save</button>
-                        </div>
-                    </form>
+  <div class="container col-xxl-8 px-2 py-2 bg-white" @submit.prevent="submitHandler">
+    <h2 class="benefits__title">
+      <!--      <img src="img/svg/Vector.png" alt="Diary of templates:" class="benefits__card-thumb"> -->
+      <h2>Дневник по шаблону</h2>
+      <form>
+        <h2 class="benefits__title_theme_templates" v-if="!loggedIn">
+          Что для Вас счастье?
+        </h2>
+          <h2 class="benefits__title_theme_templates" v-else-if="loggedIn">
+            {{ theme }}
+          </h2>
 
-                </h2>
-      </div>
+        <div class="input-field">
+          <textarea v-model.trim="answer" placeholder="введите несколько строчек"></textarea>
+        </div>
+        <div class="buttons">
+          <button type="submit" class="floating-button">Сохранить</button>
+        </div>
+      </form>
+
+    </h2>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 
+import {authComputed} from '@/store/helpers'
+
 export default {
   name: 'diary_of_templates',
   data: () => ({
-    test1: '',
-    test2: '',
-    theme1:'',
-    theme2:''
+    answer: '',
+    theme: '',
   }),
+  computed: {
+    ...authComputed
+  },
+  async created() {
+    // GET request using axios with async/await// исправить в зависисмости от url
+    const response = await axios.get("http://127.0.0.1:8000/template_diaries/new");
+    this.theme = response.data["theme"];
+  },
   methods: {
-    async created() {
-      // GET request using axios with async/await// исправить в зависисмости от url
-      const response = await axios.get("/diary_of_templates");
-      this.theme1 = response.data["theme_1"];
-      this.theme2 = response.data["theme_2"];
-    },
-
-     async submitHandler() {
+    async submitHandler() {
       let formData = {
-        test1: this.test1,
-        test2: this.test2
+        theme: this.theme,
+        answer: this.answer
       }
-     axios.post('/diary_of_templates', formData)// исправить в зависисмости от url
-    .then(function (response) {
-        console.log(response);
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
+      axios.post('http://127.0.0.1:8000/template_diaries/new', formData)// исправить в зависисмости от url
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       console.log(formData)
 
       await this.$router.push('/')
@@ -64,13 +64,17 @@ export default {
 </script>
 
 <style scoped>
-   textarea {
-    background: #f2f3f4;
-    border: 2px solid #d0d0d0; /* Параметры рамки */
-    padding: 10px; /* Поля */
-    width: 100%; /* Ширина */
-    height: 200px; /* Высота */
-    box-sizing: border-box; /* Алгоритм расчёта ширины */
-    font-size: 14px; /* Размер шрифта */
-   }
+textarea {
+  background: #f2f3f4;
+  border: 2px solid #d0d0d0; /* Параметры рамки */
+  padding: 10px; /* Поля */
+  width: 100%; /* Ширина */
+  height: 200px; /* Высота */
+  box-sizing: border-box; /* Алгоритм расчёта ширины */
+  font-size: 14px; /* Размер шрифта */
+}
+
+h2 {
+  text-align: center
+}
 </style>

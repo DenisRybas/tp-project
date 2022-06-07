@@ -1,14 +1,14 @@
 import datetime
 from functools import wraps
 
+import jwt
+from flask import current_app
 from flask import url_for, Blueprint, request, jsonify, session
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from backend_rest.awareness.app import db, app
 from backend_rest.awareness.models import User
-from flask import current_app
-from werkzeug.security import check_password_hash, generate_password_hash
 from backend_rest.awareness.users.email import SmtpEmail
-import jwt
 
 users_blueprint = Blueprint("users", __name__)
 
@@ -16,16 +16,16 @@ users_blueprint = Blueprint("users", __name__)
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = request.headers['x-access-token']
+        token = request.headers["x-access-token"]
 
         if not token:
-            return jsonify(result="token is missing"), 403
+            return jsonify(result="token is missing", code=403)
 
         try:
             jwt.decode(token, app.config["SECRET_KEY"], ["HS256"])
         except Exception as e:
             print(e)
-            return jsonify(result="token is invalid"), 403
+            return jsonify(result="token is invalid", code=403)
 
         return f(*args, **kwargs)
 
@@ -67,7 +67,7 @@ def register():
         description: Invalid request method
     """
     if session.get("logged_in"):
-        return jsonify(result="User is authenticated"), 417
+        return jsonify(result="User is authenticated", code=417)
     if request.method == "POST":
         user_json = request.get_json(force=True)
         if User.query.filter_by(email=user_json["email"]).first() is None:
@@ -81,11 +81,13 @@ def register():
             db.session.add(user)
             db.session.commit()
             send_confirm_email(user)
-            return jsonify(result="Registration successful"), 100
+            return jsonify(result="Registration successful", code=100)
         else:
-            return jsonify(result="User already exists or pending email approval"), 417
+            return jsonify(
+                result="User already exists or pending email approval", code=417
+            )
     else:
-        return jsonify(result="invalid request method"), 400
+        return jsonify(result="invalid request method", code=400)
 
 
 @users_blueprint.route("/login", methods=["POST"])
@@ -113,17 +115,15 @@ def login():
         description: Invalid request method
     """
     if session.get("logged_in"):
-        return jsonify(result="User is authenticated"), 417
+        return jsonify(result="User is authenticated", code=417)
     if request.method == "POST":
         user_json = request.get_json()
         user = User.query.filter_by(email=user_json["email"]).first()
 
-        auth = request.authorization
         if (
-                user
-                and user.is_confirmed
-                and auth
-                and check_password_hash(user.password, auth.password)
+            user
+            and user.is_confirmed
+            and check_password_hash(user.password, user_json["password"])
         ):
             token = jwt.encode(
                 {
@@ -135,11 +135,11 @@ def login():
 
             print(token)
             session["logged_in"] = True
-            return jsonify(result="Login successful", token=token), 100
+            return jsonify(result="Login successful", token=token, code=100)
         else:
-            return jsonify(result="Invalid password"), 417
+            return jsonify(result="Invalid password", code=417)
     else:
-        return jsonify(result="invalid request method"), 400
+        return jsonify(result="invalid request method", code=400)
 
 
 @users_blueprint.route("/edit_account", methods=["GET", "POST"])
@@ -183,7 +183,7 @@ def edit_account():
           400:
             description: Invalid request method
     """
-    user_id = User.decode_auth_token(request.headers['x-access-token'])
+    user_id = User.decode_auth_token(request.headers["x-access-token"])
     user = User.query.filter_by(id=user_id).first()
     if request.method == "POST":
         user_json = request.get_json()
@@ -193,17 +193,17 @@ def edit_account():
         if user_json["password"] != "":
             user.password = generate_password_hash(user_json["password"])
             db.session.commit()
-        return jsonify(result="Account edited successfully"), 100
+        return jsonify(result="Account edited successfully", code=100)
     elif request.method == "GET":
         return (
             jsonify(
                 username=user.nickname,
                 subscribed_on_daily_phrase=user.subscribed_on_daily_phrase,
+                code=200,
             ),
-            200,
         )
     else:
-        return jsonify(result="invalid request method"), 400
+        return jsonify(result="invalid request method", code=400)
 
 
 @users_blueprint.route("/logout")
@@ -216,7 +216,7 @@ def logout():
         description: Logout successful
     """
     session["logged_in"] = False
-    return jsonify("Successful logout"), 200
+    return jsonify(result="Successful logout", code=200)
 
 
 def send_reset_email(user):
@@ -256,17 +256,17 @@ def reset_request():
         description: Invalid request method
     """
     if session.get("logged_in"):
-        return jsonify(result="User is authenticated"), 417
+        return jsonify(result="User is authenticated", code=417)
     if request.method == "POST":
         user_json = request.get_json()
         user = User.query.filter_by(email=user_json["email"]).first()
         if user is not None:
             send_reset_email(user)
-            return jsonify(result="Password reset request successful"), 100
+            return jsonify(result="Password reset request successful", code=100)
         else:
-            return jsonify(result="User not found"), 404
+            return jsonify(result="User not found", code=404)
     else:
-        return jsonify(result="invalid request method"), 400
+        return jsonify(result="invalid request method", code=400)
 
 
 @users_blueprint.route("/reset_password/<token>", methods=["POST"])
@@ -291,18 +291,18 @@ def reset_token(token):
         description: Invalid request method
     """
     if session.get("logged_in"):
-        return jsonify(result="User is authenticated"), 417
+        return jsonify(result="User is authenticated", code=417)
     user = User.verify_reset_token(token)
     if user is None:
-        return jsonify(result="User not found"), 404
+        return jsonify(result="User not found", code=404)
 
     if request.method == "POST":
         user_json = request.get_json()
         user.password = generate_password_hash(user_json["password"])
         db.session.commit()
-        return jsonify(result="Password updated"), 100
+        return jsonify(result="Password updated", code=100)
     else:
-        return jsonify(result="invalid request method"), 400
+        return jsonify(result="invalid request method", code=400)
 
 
 def send_confirm_email(user):
@@ -335,13 +335,13 @@ def confirm_token(token):
         description: User is authenticated
     """
     if session.get("logged_in"):
-        return jsonify(result="User is authenticated"), 417
+        return jsonify(result="User is authenticated", code=417)
     user = User.verify_user_token(token)
     if user is None:
-        return jsonify(result="That is expired or non-existing token"), 404
+        return jsonify(result="That is expired or non-existing token", code=404)
     if request.method == "POST":
         user.is_confirmed = True
         db.session.commit()
-        return jsonify(result="User confirmed"), 200
+        return jsonify(result="User confirmed", code=200)
     else:
-        return jsonify(result="invalid request method"), 400
+        return jsonify(result="invalid request method", code=400)

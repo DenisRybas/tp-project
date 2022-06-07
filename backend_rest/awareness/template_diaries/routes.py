@@ -55,51 +55,54 @@ def create_template_diary():
         diary_json = request.get_json(force=True)
         theme = Theme.get_by_theme(diary_json["theme"])
 
-        user_id = User.decode_auth_token(request.args.get("token"))
+        token = request.headers["x-access-token"]
+        user_id = User.decode_auth_token(token)
 
         diary = UserTemplateDiary(
             user_id=int(user_id), theme_id=theme.id, answer=diary_json["answer"]
         )
         db.session.add(diary)
         db.session.commit()
-        return jsonify("Template diary created successfully"), 100
+        return jsonify(result="Template diary created successfully", code=100)
     elif request.method == "GET":
         theme_id = get_random_theme_id()
 
         theme = Theme.query.get(theme_id)
-        return jsonify(theme=theme.theme), 200
+        return jsonify(theme=theme.theme, code=200)
     return None
 
 
-@template_diaries_blueprint.route("/template_diaries/<int:template_diary_id>", methods=["GET"])
+@template_diaries_blueprint.route(
+    "/template_diaries/<int:template_diary_id>", methods=["GET"]
+)
 @token_required
 def get_template_diary(template_diary_id):
-    user_id = User.decode_auth_token(request.args.get("token"))
+    token = request.headers["x-access-token"]
+    user_id = User.decode_auth_token(token)
 
     template_diary = UserTemplateDiary.query.filter_by(
         id=template_diary_id, user_id=int(user_id)
     ).first_or_404()
     theme = Theme.query.get(template_diary.theme_id)
-    return jsonify(theme=theme, answer=template_diary.answer), 200
+    return jsonify(theme=theme.theme, answer=template_diary.answer, code=200)
 
 
 @template_diaries_blueprint.route("/template_diaries", methods=["GET"])
 @token_required
 def get_all_template_diaries():
-    user_id = User.decode_auth_token(request.args.get("token"))
+    token = request.headers["x-access-token"]
+    user_id = User.decode_auth_token(token)
 
-    template_diaries = UserTemplateDiary.query.filter_by(
-        user_id=int(user_id)
-    )
+    template_diaries = UserTemplateDiary.query.filter_by(user_id=int(user_id))
 
     template_diaries_to_json = []
     for template_diary in template_diaries:
         theme = Theme.query.get(template_diary.theme_id)
         diary_obj = {
-            'id': template_diary.id,
-            'theme': theme,
-            'date_created': template_diary.date_created
+            "id": template_diary.id,
+            "theme": theme.theme,
+            "date_created": template_diary.date_created,
         }
         template_diaries_to_json.append(diary_obj)
 
-    return jsonify(template_diaries=template_diaries_to_json), 200
+    return jsonify(template_diaries=template_diaries_to_json, code=200)

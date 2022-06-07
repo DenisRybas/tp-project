@@ -1,10 +1,10 @@
-import base64
-
-from sqlalchemy import types
 from datetime import datetime
+
+import jwt
 from flask import current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-import jwt
+from sqlalchemy import types
+
 from backend_rest.awareness.app import db, app
 
 
@@ -153,7 +153,9 @@ class Emotion(db.Model):
 class Action(db.Model):
     id = db.Column(db.Integer, nullable=False, primary_key=True)
     action_name = db.Column(db.String(100), nullable=False)
-    related_users = db.relationship("UserEmotion", backref="related_users", lazy=True)
+    related_users = db.relationship(
+        "UserEmotion", backref="related_user_actions", lazy=True
+    )
 
 
 class UserEmotion(db.Model):

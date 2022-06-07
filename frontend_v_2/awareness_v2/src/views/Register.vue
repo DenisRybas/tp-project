@@ -1,53 +1,45 @@
 <template>
-  <form class="card auth-card" @submit.prevent="submitHandler">
+  <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
+  <form class="modal1" @submit.prevent="submitHandler">
     <div class="card-content">
       <span class="card-title">Awareness</span>
       <div class="input-field">
         <input
             id="email"
-            type="text"
+            type="email"
             v-model.trim="email"
+            placeholder="email"
+            required
         >
-        <label for="email">Email</label>
       </div>
       <div class="input-field">
         <input
             id="password"
             type="password"
             v-model.trim="password"
+            placeholder="пароль"
+            pattern="^[a-zA-Z0-9]{5,}$" title="Must contain 5 or more characters" required
         >
-        <label for="password">Пароль</label>
-        <small
-        >
-          Введите пароль
-        </small>
       </div>
       <div class="input-field">
         <input
             id="name"
             type="text"
             v-model.trim="name"
+            placeholder="имя"
+            pattern="^[a-zA-Z0-9]+" title="Must contain only letters or numbers" required
         >
 
-        <label for="name">Имя</label>
-        <small
-          class="helper-text invalid"
-        >
-          Введите ваше имя
-        </small>
       </div>
       <p>
-        <label>
-          <input type="checkbox"  />
-          <span>С правилами согласен</span>
-        </label>
+        <input type="checkbox" value="subscribed_on_daily_phrase" v-model="agree">
+        <label>Подписка на фразу дня</label>
       </p>
     </div>
     <div class="card-action">
       <div>
         <button class="btn waves-effect waves-light auth-submit" type="submit">
-          Зарегистрироваться
-          <i class="material-icons right"></i>
+<a class="w-100 btn btn btn-secondary text-light " style="color: white !important">Зарегистрироваться</a>
         </button>
       </div>
 
@@ -68,22 +60,25 @@ export default {
     email: '',
     password: '',
     name: '',
-    agree: false
+    agree: false,
+    error: false,
+    errorMsg: `An error occurred, please try again`
   }),
   methods: {
-     async submitHandler() {
+    async submitHandler() {
       let formData = {
         email: this.email,
         password: this.password,
-        name: this.name
+        username: this.name,
+        subscribed_on_daily_phrase: this.agree
       }
-     axios.post('/register', formData)// исправить в зависисмости от url
-    .then(function (response) {
-        console.log(response);
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
+      axios.post('http://127.0.0.1:8000/register', formData)// исправить в зависисмости от url
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       console.log(formData)
 
       await this.$router.push('/')
