@@ -64,12 +64,15 @@ def make_message(ticket_id):
     return jsonify(result="message sent successfully", code=100)
 
 
-@posts.route("/technical_support_tickets/users-tickets/<int:user_id>")
+@technical_support_blueprint.route("/technical_support_tickets/users-tickets")
 @token_required
-def following_tickets(user_id):
-    posts = []
-    following = Subscription.query.filter_by(follower_id=user_id)
-    for user in following:
-        posts.extend(Post.query.filter(Post.user_id == user.user_id))
-    sorted(posts, key=lambda post: post.date_posted)
-    return render_template('newsfeed.html', posts=posts)
+def following_tickets():
+    tickets = []
+    token = request.headers["x-access-token"]
+    user_id = User.decode_auth_token(token)
+
+    following = TechnicalSupportTicket.query.filter_by(creator_id=user_id)
+    sorted(following, key=lambda ticket: ticket.date)
+    for ticket in following:
+        tickets.append({'id': ticket.id, 'title': ticket.title})
+    return jsonify(tickets=tickets)

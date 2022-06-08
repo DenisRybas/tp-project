@@ -13,13 +13,32 @@
             <router-link to="/contacts">Контакты</router-link>
           </a>
         </li>
+        <li class="nav-item me-2" v-if="loggedIn">
+          <a class="nav-link" aria-current="page">
+            <router-link to="/my_appeals">Техподдержка</router-link>
+          </a>
+        </li>
+        <li class="nav-link">
+          <router-link to="/faq">FAQ</router-link>
+        </li>
       </ul>
     </div>
   </footer>
 </template>
 
 <script>
+import {authComputed} from '@/store/helpers'
+
+export default {
+  computed: {
+    ...authComputed
+  }
+}
 </script>
 
-
-
+<style scoped>
+a {
+  color: white;
+  text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+</style>

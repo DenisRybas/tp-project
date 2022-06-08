@@ -1,20 +1,21 @@
 <template>
   <div class="container col-xxl-8 px-2 py-2 bg-white">
     <h2 class="benefits__title">
-      <h2>Дневник ситуаций за ?</h2>
       <form>
-        <h2>Ситуация: {{ situation }}</h2>
+        <h2>{{ situation }}</h2>
         <h2>Варианты:</h2>
         <li v-for="answer in answers">
           <div class="card mb-3 shadow-lg ">
             <div class="card-body">
               <ul class="diary__title">
-                <h4>{{ answer }}</h4>
+                <h4>Ответ: {{ answer.answer }}</h4>
+                <h4>Объяснение: {{ answer.explanation }}</h4>
               </ul>
             </div>
           </div>
         </li>
-        <h2>Правильный ответ: {{ right_answer }}</h2>
+        <h2>Предпочтительный ответ: {{ right_answer }}</h2>
+        <h2>Ваш ответ: {{ user_answer }}</h2>
         <div class="buttons">
           <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
             <a class="w-100 btn btn btn-secondary text-light " style="color: white !important">
@@ -43,7 +44,8 @@ export default {
     const response = await axios.get("http://127.0.0.1:8000/situation_diaries/" + this.$route.params.id);
     this.answers = response.data["answers"];
     this.situation = response.data["situation"];
-    this.right_answer = response.data["right_answer"];
+    this.right_answer = response.data["preferred_answer"];
+    this.user_answer = response.data["user_answer"];
   },
   methods: {},
 }

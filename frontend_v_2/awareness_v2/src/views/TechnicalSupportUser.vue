@@ -1,19 +1,20 @@
 <template>
   <div class="container col-xxl-8 px-2 py-2 bg-white" @submit.prevent="submitHandler">
     <h2 class="benefits__title">
-      <img src="img/svg/Vector.png" alt="Diary of templates:" class="benefits__card-thumb"> Создание запроса
+      Создание запроса
+
       <form>
         <h2 class="benefits__title_theme_templates">
           Введите тему:
         </h2>
         <div class="input-field">
-          <textarea class="theme" v-model.trim="theme" placeholder="введите тему"></textarea>
+          <textarea class="theme" v-model.trim="title" placeholder="введите тему"></textarea>
         </div>
         <h2 class="benefits__title_theme_templates">
-          Введите запрос:
+          Введите содержиние:
         </h2>
         <div class="input-field">
-          <textarea v-model.trim="request" placeholder="введите запрос"></textarea>
+          <textarea v-model.trim="content" placeholder="введите содержание"></textarea>
         </div>
         <div class="buttons">
           <button type="submit" class="floating-button">Отправить</button>
@@ -30,16 +31,16 @@ import axios from "axios";
 export default {
   name: 'TechnicalSupportUser',
   data: () => ({
-    theme: '',
-    request: ''
+    title: '',
+    content: ''
   }),
   methods: {
     async submitHandler() {
       let formData = {
-        theme: this.theme,
-        request: this.request
+        title: this.title,
+        content: this.content
       }
-      axios.post('/technical_support_user', formData)// исправить в зависисмости от url
+      axios.post('/technical_support_tickets/new', formData)// исправить в зависисмости от url
           .then(function (response) {
             console.log(response);
           })
@@ -73,5 +74,9 @@ textarea.theme {
   height: 50px; /* Высота */
   box-sizing: border-box; /* Алгоритм расчёта ширины */
   font-size: 16px; /* Размер шрифта */
+}
+
+h2 {
+  text-align: center
 }
 </style>

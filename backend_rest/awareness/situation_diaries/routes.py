@@ -152,7 +152,7 @@ def get_all_situation_diaries():
     situation_diaries_to_json = []
     for situation_diary in situation_diaries:
         situation = Situation.query.get(situation_diary.situation_id)
-        diary_obj = {"id": situation_diary.id, "situation": situation}
+        diary_obj = {"id": situation_diary.id, "situation": situation.situation}
         situation_diaries_to_json.append(diary_obj)
 
     return jsonify(situation_diaries=situation_diaries_to_json, code=200)

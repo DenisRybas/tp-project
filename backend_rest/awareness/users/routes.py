@@ -121,9 +121,9 @@ def login():
         user = User.query.filter_by(email=user_json["email"]).first()
 
         if (
-            user
-            and user.is_confirmed
-            and check_password_hash(user.password, user_json["password"])
+                user
+                and user.is_confirmed
+                and check_password_hash(user.password, user_json["password"])
         ):
             token = jwt.encode(
                 {
@@ -195,12 +195,10 @@ def edit_account():
             db.session.commit()
         return jsonify(result="Account edited successfully", code=100)
     elif request.method == "GET":
-        return (
-            jsonify(
-                username=user.nickname,
-                subscribed_on_daily_phrase=user.subscribed_on_daily_phrase,
-                code=200,
-            ),
+        return jsonify(
+            username=user.nickname,
+            subscribed_on_daily_phrase=user.subscribed_on_daily_phrase,
+            code=200,
         )
     else:
         return jsonify(result="invalid request method", code=400)

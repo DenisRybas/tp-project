@@ -2,7 +2,7 @@
   <div class="container col-xxl-8 px-2 py-2 bg-white">
     <form>
       <h2 class="benefits__title">
-        Выберите дату дневника, которую вы бы хотели просмотреть:</h2>
+        Выберите ситуацию дневника, которую Вы бы хотели просмотреть:</h2>
       <div id="v-model-radiobutton" class="demo">
         <div class="d-flex flex-column flex-grow-1 ms-5">
           <li v-for="diary in diaries">
@@ -10,8 +10,8 @@
               <div class="card-body">
                 <ul class="diary__title">
                   <a class="link_list_diary">
-                    <router-link :to="{ path: '/viewing_diary_situations/'+ diary.id}"><a>Дневник за {{
-                        diary.date
+                    <router-link :to="{ path: '/viewing_diary_situations/'+ diary.id}"><a>{{
+                        diary.situation
                       }}</a>
                     </router-link>
                   </a>

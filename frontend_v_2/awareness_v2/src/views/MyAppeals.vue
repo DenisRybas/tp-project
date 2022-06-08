@@ -1,27 +1,31 @@
 <template>
   <div class="container col-xxl-8 px-2 py-2 bg-white" @submit.prevent="submitHandler">
     <h2 class="benefits__title">
-      <img src="img/svg/Vector.png" alt="Diary of templates:" class="benefits__card-thumb"> Technical support
+      <h2>Техническая поддержка
+        <button type="submit" class="floating-button">
+          <router-link to="/technical_support_user">Создать обращение</router-link>
+        </button>
+      </h2>
       <form>
-        <ul id="example-1">
-          <li v-for="item in items" :key="item.message">
-            {{ item.message }}
-          </li>
-        </ul>
-        <h2 class="benefits__title_theme_templates">
-          Запрос пользователя:
-        </h2>
-        <div class="input-field">
-          <textarea v-model.trim="theme1" placeholder="enter a few lines"></textarea>
-        </div>
-        <h2 class="benefits__title_theme_templates">
-          Ответ техподдержки:
-        </h2>
-        <div class="input-field">
-          <textarea v-model.trim="theme2 " placeholder="enter a few lines"></textarea>
+        <h2 class="benefits__title">
+          Выберите обращение, которое вы бы хотели просмотреть:</h2>
+        <div id="v-model-radiobutton" class="demo">
+          <div class="d-flex flex-column flex-grow-1 ms-5">
+            <li v-for="appeal in appeals">
+              <div class="card mb-3 shadow-lg ">
+                <div class="card-body">
+                  <ul class="diary__title">
+                    <a class="link_list_diary">
+                      <router-link :to="{ path: '/my_appeals/'+ appeal.id}"><a>{{ appeal.title }}</a>
+                      </router-link>
+                    </a>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </div>
         </div>
       </form>
-
     </h2>
   </div>
 </template>
@@ -30,35 +34,36 @@ import axios from "axios";
 
 export default {
   name: "MyAppeals",
-  data: () => ({
-    theme1: '',
-    theme2: '',
-    results: []
-  }),
-  methods: {
-    async asyncData() {
-      const response = await axios.get('/my_appeals')
-      this.results = response.data
-    },
-    async created() {
-      // GET request using axios with async/await// исправить в зависисмости от url
-      const response = await axios.get("/diary_of_templates");
-      this.theme1 = response.data["theme_1"];
-      this.theme2 = response.data["theme_2"];
-    },
-  }
+  data() {
+    return {
+      appeals: [],
+      errorMsg: `An error occurred, please try again`
+    }
+  },
+  async created() {
+// GET request using axios with async/await// исправить в зависисмости от url
+    const response = await axios.get("http://127.0.0.1:8000/technical_support_tickets/users-tickets");
+    this.appeals = response.data["tickets"];
+  },
 }
 </script>
 
-
 <style scoped>
-textarea {
-  background: #f2f3f4;
-  border: 2px solid #d0d0d0; /* Параметры рамки */
-  padding: 10px; /* Поля */
-  width: 100%; /* Ширина */
-  height: 200px; /* Высота */
-  box-sizing: border-box; /* Алгоритм расчёта ширины */
-  font-size: 14px; /* Размер шрифта */
+h4 {
+  margin-left: 30px;
+}
+
+li {
+  list-style-type: none;
+}
+
+h3 {
+  margin-left: 100px;
+}
+
+button {
+  float: right;
 }
 </style>
+
+

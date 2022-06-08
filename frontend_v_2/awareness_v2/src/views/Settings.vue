@@ -7,7 +7,7 @@
              src="https://raw.githubusercontent.com/twbs/icons/main/icons/person.svg">
       </div>
       <div class="col-lg-8">
-        <h1 class="display-5 lh-1 mb-3 ms-3">test_name</h1>
+        <h1 class="display-5 lh-1 mb-3 ms-3">{{ nickname }}</h1>
       </div>
     </div>
 
@@ -52,8 +52,21 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "settings"
+  name: "Settings",
+  data() {
+    return {
+      nickname: '',
+      errorMsg: `An error occurred, please try again`
+    }
+  },
+  async created() {
+    // GET request using axios with async/await// исправить в зависисмости от url
+    const response = await axios.get("http://127.0.0.1:8000/edit_account");
+    this.nickname = response.data["username"];
+  },
 }
 </script>
 

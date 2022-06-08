@@ -19,6 +19,7 @@ import ViewingDiarySituationsView from "@/views/ViewingDiarySituations.vue";
 import ViewingDiaryTemplatesIdView from "@/views/ViewingDiaryTemplatesId.vue";
 import ViewingDiaryEmotionsIdView from "@/views/ViewingDiaryEmotionsId.vue";
 import ViewingDiarySituationsIdView from "@/views/ViewingDiarySituationsId.vue";
+import MyAppealsIdView from "@/views/MyAppealsId.vue";
 
 const routes = [
     {
@@ -148,6 +149,16 @@ const routes = [
         name: 'viewing_diary_situations_id',
         meta: {layout: 'main'},
         component: ViewingDiarySituationsIdView,
+        props: (route) => {
+            const id = Number.parseInt(route.params.id);
+            return {id}
+        },
+    },
+    {
+        path: '/my_appeals/:id',
+        name: 'my_appeals_id',
+        meta: {layout: 'main'},
+        component: MyAppealsIdView,
         props: (route) => {
             const id = Number.parseInt(route.params.id);
             return {id}

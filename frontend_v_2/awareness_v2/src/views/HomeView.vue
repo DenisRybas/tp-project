@@ -48,7 +48,7 @@
           <img src="img/svg/Outline.png" alt="" class="benefits__card-thumb">
         </div>
         <h3 class="benefits__card-title">
-          Трекер привычек
+         Трекер привычек
         </h3>
         <p class="benefits__card-desc">
           Отслеживание Ваших привычек

@@ -12,39 +12,24 @@
         </router-link>
       </h1>
       <ul class="navbar-nav nav-pills ms-auto mb-2 mb-lg-0 justify-content-end">
-        <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
-          <a class="nav-link" style="color: black !important;" aria-current="page">
-            <router-link to="/faq">FAQ</router-link>
-          </a>
+        <li class="nav-item me-2 mb-2 mb-lg-0 text-center" v-if="!loggedIn">
+            <router-link to="/login">Логин</router-link>
         </li>
         <li class="nav-item me-2 mb-2 mb-lg-0 text-center" v-if="!loggedIn">
-          <a class="w-100 btn btn btn-secondary text-light " style="color: white !important">
-            <router-link to="/login" >Логин</router-link>
-          </a>
-        </li>
-        <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
-          <a class="w-100 btn btn btn-secondary text-light " v-if="!loggedIn" style="color: white !important">
-            <router-link to="/registration">Регистрация</router-link>
-          </a>
+          <router-link to="/registration">Регистрация</router-link>
         </li>
         <li v-if="loggedIn">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
             <li class="nav-item me-2 mb-2 mb-lg-0 dropdown">
               <ul class="navbar-nav nav-pills ms-auto mb-2 mb-lg-0 justify-content-end">
                 <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
-                  <a class="w-100 btn btn btn-secondary text-light " style="color: white !important">
-                    <router-link to="/diary">Мои дневники</router-link>
-                  </a>
+                  <router-link to="/diary">Мои дневники</router-link>
                 </li>
                 <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
-                  <a class="w-100 btn btn btn-secondary text-light " style="color: white !important">
-                    <router-link to="/settings">Настройки</router-link>
-                  </a>
+                  <router-link to="/settings">Настройки</router-link>
                 </li>
                 <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
-                  <a class="w-100 btn btn btn-secondary text-light " style="color: white !important">
-                    <router-link to="/logout">Выход</router-link>
-                  </a>
+                  <router-link to="/logout">Выход</router-link>
                 </li>
               </ul>
             </li>
@@ -65,3 +50,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+a {
+  color: white;
+  text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+</style>
