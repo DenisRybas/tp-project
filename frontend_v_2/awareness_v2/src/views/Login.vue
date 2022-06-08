@@ -1,41 +1,44 @@
 <template>
   <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
-    <form class="modal1" @submit.prevent="submitHandler">
-      <div class="form-signin text-center mt-4">
-        <div class="card-content">
+  <form class="modal1" @submit.prevent="submitHandler">
+    <div class="form-signin text-center mt-4">
+      <div class="card-content">
+        <h2>
+          <img src="img/logo.png" alt="" width="50" height="50">
           <span class="card-title">Awareness</span>
-          <div class="input-field">
-            <input
-                id="email"
-                type="email"
-                v-model="email"
-                placeholder="email"
-                required>
-          </div>
-          <div class="input-field">
-            <input
-                id="password"
-                type="password" v-model="password"
-                pattern="^[a-zA-Z0-9]{5,}$"
-                placeholder="пароль"
-                title="Must contain 5 or more characters" required
-            >
-          </div>
+        </h2>
+        <div class="input-field">
+          <input
+              id="email"
+              type="email"
+              v-model="email"
+              placeholder="email"
+              required>
         </div>
-        <div class="card-action">
-          <div>
-            <button type="submit" class="btn waves-effect waves-light auth-submit"><a
-                class="w-100 btn btn btn-secondary text-light " style="color: white !important">Войти</a>
-            </button>
-          </div>
-
-          <p class="center">
-            Нет аккаунта?
-            <router-link to="/register">Зарегистрироваться</router-link>
-          </p>
+        <div class="input-field">
+          <input
+              id="password"
+              type="password" v-model="password"
+              pattern="^[a-zA-Z0-9]{5,}$"
+              placeholder="пароль"
+              title="Must contain 5 or more characters" required
+          >
         </div>
       </div>
-    </form>
+      <div class="card-action">
+        <div>
+          <button type="submit" class="btn waves-effect waves-light auth-submit"><a
+              class="w-100 btn btn btn-secondary text-light " style="color: white !important">Войти</a>
+          </button>
+        </div>
+
+        <p class="center">
+          Нет аккаунта?
+          <router-link to="/register">Зарегистрироваться</router-link>
+        </p>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>

@@ -2,7 +2,10 @@
   <p v-show="error" class="text-sm text-red-500">{{ errorMsg }}</p>
   <form class="modal1" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">Awareness</span>
+      <h2>
+        <img src="img/logo.png" alt="" width="50" height="50">
+        <span class="card-title">Awareness</span>
+      </h2>
       <div class="input-field">
         <input
             id="email"
@@ -39,7 +42,7 @@
     <div class="card-action">
       <div>
         <button class="btn waves-effect waves-light auth-submit" type="submit">
-<a class="w-100 btn btn btn-secondary text-light " style="color: white !important">Зарегистрироваться</a>
+          <a class="w-100 btn btn btn-secondary text-light " style="color: white !important">Зарегистрироваться</a>
         </button>
       </div>
 

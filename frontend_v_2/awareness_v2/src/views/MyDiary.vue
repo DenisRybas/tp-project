@@ -56,7 +56,7 @@
             <div class="card-body">
               <ul class="diary__title">
                 <a class="link_list_diary">
-                  <router-link class="a" to="/habit_tracker">Трекер привычек</router-link>
+                  <router-link class="a" to="/viewing_habit_tracker">Трекер привычек</router-link>
                 </a>
               </ul>
             </div>

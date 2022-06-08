@@ -20,6 +20,8 @@ import ViewingDiaryTemplatesIdView from "@/views/ViewingDiaryTemplatesId.vue";
 import ViewingDiaryEmotionsIdView from "@/views/ViewingDiaryEmotionsId.vue";
 import ViewingDiarySituationsIdView from "@/views/ViewingDiarySituationsId.vue";
 import MyAppealsIdView from "@/views/MyAppealsId.vue";
+import ViewingHabitTrackerIdView from "@/views/ViewingHabitTrackerId.vue";
+import ViewingHabitTrackerView from "@/views/ViewingHabitTracker.vue";
 
 const routes = [
     {
@@ -159,6 +161,22 @@ const routes = [
         name: 'my_appeals_id',
         meta: {layout: 'main'},
         component: MyAppealsIdView,
+        props: (route) => {
+            const id = Number.parseInt(route.params.id);
+            return {id}
+        },
+    },
+    {
+        path: '/viewing_habit_tracker',
+        name: 'viewing_habit_tracker',
+        meta: {layout: 'main'},
+        component: ViewingHabitTrackerView
+    },
+    {
+        path: '/viewing_habit_tracker/:id',
+        name: 'viewing_habit_tracker_id',
+        meta: {layout: 'main'},
+        component: ViewingHabitTrackerIdView,
         props: (route) => {
             const id = Number.parseInt(route.params.id);
             return {id}

@@ -44,6 +44,17 @@ def create_app():
         emotion_diaries_blueprint,
     )
 
+    from backend_rest.awareness.habit_tracker.routes import (
+        habit_tracker_blueprint,
+    )
+
+    from backend_rest.awareness.technical_support.routes import (
+        technical_support_blueprint,
+    )
+
+
+    app.register_blueprint(habit_tracker_blueprint)
+    app.register_blueprint(technical_support_blueprint)
     app.register_blueprint(users_blueprint)
     app.register_blueprint(template_diaries_blueprint)
     app.register_blueprint(situation_diaries_blueprint)
