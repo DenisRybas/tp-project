@@ -13,3 +13,4 @@ Web приложение для повышения самоосознаннос�
 6. Ссылка на приложение - https://eternal-awareness.herokuapp.com/
 7. Swagger - https://github.com/SP-organization/Awareness/blob/prod/docs/swagger.png
 8. Видеоролик с описанием бэкенд-части - https://drive.google.com/file/d/1-X2pccq1enoCY0b9SahWRxpv4IZ_HWla/view?usp=sharing
+9. Видеоролик с описанием реализации - https://drive.google.com/file/d/1rJOT1W3_Q2QITERoiNLZl3UuxfgjUPel/view?usp=sharing
