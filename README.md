@@ -23,3 +23,4 @@ Web приложение для повышения самоосознаннос�
 11. Видеоролик с описанием бэкенд-части - https://drive.google.com/file/d/1-X2pccq1enoCY0b9SahWRxpv4IZ_HWla/view?usp=sharing
 12. Видеоролик с описанием фронтенд-части - https://drive.google.com/file/d/19HcoPx6Zx6XgHUPSmSdLw0bd6Xv8K5UP/view?usp=sharing
 13. Видеоролик с описанием реализации - https://drive.google.com/file/d/1rJOT1W3_Q2QITERoiNLZl3UuxfgjUPel/view?usp=sharing
+14. Видеоролик с описанием деплоя - https://drive.google.com/file/d/1kF_Wtf4DbmiCySq7Oj8glM29sJkUHfuF/view?usp=sharing
