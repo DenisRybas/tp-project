@@ -2,6 +2,10 @@
 
 Web приложение для повышения самоосознанности
 
+Авторы: 
+Студент 5 группы 3 курса ФКН Рыбас Д.В.
+Студент 5 группы 3 курса ФКН Соболь И.И.
+
 ## Ссылки на документацию
 
 1. ТЗ (на google docs)
@@ -16,4 +20,5 @@ Web приложение для повышения самоосознаннос�
 9. Ссылка на приложение - https://eternal-awareness.herokuapp.com/
 10. Swagger - https://github.com/SP-organization/Awareness/blob/prod/docs/swagger.png
 11. Видеоролик с описанием бэкенд-части - https://drive.google.com/file/d/1-X2pccq1enoCY0b9SahWRxpv4IZ_HWla/view?usp=sharing
-12. Видеоролик с описанием реализации - https://drive.google.com/file/d/1rJOT1W3_Q2QITERoiNLZl3UuxfgjUPel/view?usp=sharing
+12. Видеоролик с описанием фронтенд-части - https://drive.google.com/file/d/19HcoPx6Zx6XgHUPSmSdLw0bd6Xv8K5UP/view?usp=sharing
+13. Видеоролик с описанием реализации - https://drive.google.com/file/d/1rJOT1W3_Q2QITERoiNLZl3UuxfgjUPel/view?usp=sharing
