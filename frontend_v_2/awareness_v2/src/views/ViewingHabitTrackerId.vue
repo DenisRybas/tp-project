@@ -14,7 +14,7 @@
         <div class="buttons">
           <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
             <a class="w-40 btn btn btn-secondary text-light " style="color: white !important">
-              <router-link to="/viewing_diary_templates">Вернуться</router-link>
+              <router-link to="/viewing_habit_tracker">Вернуться</router-link>
             </a>
           </li>
         </div>

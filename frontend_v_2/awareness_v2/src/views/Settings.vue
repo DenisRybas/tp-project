@@ -2,12 +2,9 @@
   <div class="container col-xxl-8 px-2 py-2 bg-white">
     <div class="row flex-lg-row align-items-center g-0 py-5">
       <div class="col-10 col-sm-8 col-lg-4 mb-3 mx-auto px-4 py-4 d-flex justify-content-center">
-        <img class="bg-light rounded-circle d-block img-fluid text-white p-1" width="150" height="150"
-             alt="avatar"
-             src="https://raw.githubusercontent.com/twbs/icons/main/icons/person.svg">
       </div>
       <div class="col-lg-8">
-        <h1 class="display-5 lh-1 mb-3 ms-3">{{ nickname }}</h1>
+        <h1 class="display-5 lh-1 mb-3 ms-3"> {{ nickname }} </h1>
       </div>
     </div>
 

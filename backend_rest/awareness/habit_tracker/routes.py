@@ -92,15 +92,18 @@ def get_all_habit_trackers():
     token = request.headers["x-access-token"]
     user_id = User.decode_auth_token(token)
 
-    habit_query = UserSituationDiary.query.filter_by(user_id=int(user_id))
+    habit_query = HabitTracker.query.filter_by(user_id=int(user_id))
 
     habits = []
     for habit in habit_query:
+        year = str(habit_query.date_started.year)
+        month = str(habit_query.date_started.month)
+        day = str(habit_query.date_started.day)
         habits.append(
             {
                 "habit_id": habit.id,
                 "habit_name": habit.habit_name,
-                "date_started": habit.date_started,
+                "date_started": year + "." + month + "." + day,
             }
         )
 

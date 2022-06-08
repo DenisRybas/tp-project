@@ -52,7 +52,6 @@ def create_app():
         technical_support_blueprint,
     )
 
-
     app.register_blueprint(habit_tracker_blueprint)
     app.register_blueprint(technical_support_blueprint)
     app.register_blueprint(users_blueprint)

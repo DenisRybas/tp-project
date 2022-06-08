@@ -10,7 +10,7 @@
               <div class="card-body">
                 <ul class="diary__title">
                   <a class="link_list_diary">
-                    <router-link :to="{ path: '/viewing_habit_tracker/'+ habit.id}"><a>{{ habit.name }}</a>
+                    <router-link :to="{ path: '/viewing_habit_tracker/'+ habit.habit_id}"><a>{{ habit.habit_name }}</a>
                     </router-link>
                   </a>
                 </ul>
@@ -36,9 +36,9 @@ export default {
   },
   async created() {
 // GET request using axios with async/await// исправить в зависисмости от url
-    const response = await axios.get("http://127.0.0.1:8000/habit_tracker");
+    const response = await axios.get("http://127.0.0.1:8000/habit_trackers");
     this.habits = response.data["habits"];
-    console.log(this.diaries)
+    console.log(this.habits)
   },
 }
 </script>

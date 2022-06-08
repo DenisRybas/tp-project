@@ -101,7 +101,9 @@ def get_emotion_diary(emotion_diary_id):
     token = request.headers["x-access-token"]
     user_id = User.decode_auth_token(token)
 
-    emotion_diary = UserEmotion.query.filter_by(id=emotion_diary_id, user_id=user_id).first_or_404()
+    emotion_diary = UserEmotion.query.filter_by(
+        id=emotion_diary_id, user_id=user_id
+    ).first_or_404()
 
     # splitted_date = emotion_diary.date.strftime("%Y")
 
@@ -118,14 +120,16 @@ def get_emotion_diary(emotion_diary_id):
 
     emotions_to_json = []
     for emotion_action in emotions_actions:
-        emotions_to_json.append(Emotion.query.get(emotion_action.emotion_id).emotion_name)
+        emotions_to_json.append(
+            Emotion.query.get(emotion_action.emotion_id).emotion_name
+        )
 
     actions_to_json = []
     for emotion_action in emotions_actions:
         actions_to_json.append(Action.query.get(emotion_action.action_id).action_name)
 
     return jsonify(
-        date=str(day) + '.' + str(month) + '.' + str(year),
+        date=str(day) + "." + str(month) + "." + str(year),
         emotions=emotions_to_json,
         actions=actions_to_json,
         day_rate=emotion_diary.day_rate,
@@ -146,7 +150,7 @@ def get_all_emotion_diaries():
         year = str(emotion_diary.date.year)
         month = str(emotion_diary.date.month)
         day = str(emotion_diary.date.day)
-        diary_obj = {"id": emotion_diary.id, "date": year + '.' + month + '.' + day}
+        diary_obj = {"id": emotion_diary.id, "date": year + "." + month + "." + day}
         emotion_diaries_to_json.append(diary_obj)
 
     return jsonify(emotion_diaries=emotion_diaries_to_json, code=200)

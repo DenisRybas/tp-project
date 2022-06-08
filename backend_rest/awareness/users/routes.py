@@ -121,9 +121,9 @@ def login():
         user = User.query.filter_by(email=user_json["email"]).first()
 
         if (
-                user
-                and user.is_confirmed
-                and check_password_hash(user.password, user_json["password"])
+            user
+            and user.is_confirmed
+            and check_password_hash(user.password, user_json["password"])
         ):
             token = jwt.encode(
                 {
