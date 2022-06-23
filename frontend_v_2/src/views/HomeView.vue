@@ -14,9 +14,9 @@
         <p class="benefits__card-desc">
           Ответ на задаваемые приложением вопросы
         </p>
-        <a class="link1">
+        <div class="link">
           <router-link class="a" to="/diary_of_templates"> Начать</router-link>
-        </a>
+        </div>
       </div>
       <div class="benefits__card">
         <div class="benefits__card-pic">
@@ -40,7 +40,7 @@
         <p class="benefits__card-desc">
           Постановка Вас приложением в различные ситуации
         </p>
-        <router-link class="a" to="/diary_of_situations"> Начать</router-link>
+        <router-link class="a" to="/diary_of_situations" tag="button"> Начать</router-link>
       </div>
 
       <div class="benefits__card">
@@ -48,12 +48,14 @@
           <img src="img/svg/Outline.png" alt="" class="benefits__card-thumb">
         </div>
         <h3 class="benefits__card-title">
-         Трекер привычек
+          Трекер привычек
         </h3>
         <p class="benefits__card-desc">
           Отслеживание Ваших привычек
         </p>
-        <router-link class="a" to="/habit_tracker"> Начать</router-link>
+        <div class="link">
+          <router-link class="a" to="/habit_tracker"> Начать</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -63,4 +65,17 @@
 export default {
   name: 'HomeView',
 }
+
 </script>
+document.body.style.zoom="80%"
+<style scoped>
+a:hover {
+  color: #4f73e8; /* Цвет ссылки при наведении */
+}
+html{
+zoom: 80%;
+}
+a:focus {
+  outline: none;
+}
+</style>
