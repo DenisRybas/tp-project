@@ -1,9 +1,7 @@
 <template>
-  <div class="container col-xxl-8 px-2 py-2 bg-white">
+  <div class="container col-xxl-8 px-2 py-2 bg-white cursor">
     <div class="row flex-lg-row align-items-center g-0 py-5">
-      <div class="col-10 col-sm-8 col-lg-4 mb-3 mx-auto px-4 py-4 d-flex justify-content-center">
-      </div>
-      <div class="col-lg-8">
+      <div class="text-center">
         <h1 class="display-5 lh-1 mb-3 ms-3"> {{nickname}} </h1>
       </div>
     </div>
@@ -14,7 +12,7 @@
              aria-orientation="vertical">
           <a class="w-100 btn btn-lg btn-secondary text-light"
              aria-selected="true">
-            <router-linkc class="a" to="/diary">Мои дневники</router-linkc>
+            <router-link class="a" to="/diary">Мои дневники</router-link>
           </a>
           <a class="nav-link btn btn-lg remove-glow"
              aria-selected="false">
@@ -80,7 +78,7 @@ export default {
   },
   async created() {
     // GET request using axios with async/await// исправить в зависисмости от url
-    const response = await axios.get("http://127.0.0.1:8000/edit_account");
+    const response = await axios.get("https://eternal-awareness.herokuapp.com/edit_account");
     this.nickname = response.data["username"];
   },
 }
@@ -88,6 +86,20 @@ export default {
 
 <style scoped>
 a {
-  text-decoration: none; /* Убираем подчёркивание */
+  color: black;
+  text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+
+a:hover {
+color: #4f73e8; /* Цвет ссылки при наведении */
+      cursor: pointer;
+}
+
+a:focus {
+  outline: none;
+}
+
+.cursor {
+  cursor: default;
 }
 </style>
