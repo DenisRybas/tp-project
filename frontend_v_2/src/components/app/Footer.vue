@@ -15,11 +15,8 @@
         </li>
         <li class="nav-item me-2" v-if="loggedIn">
           <a class="nav-link" aria-current="page">
-            <router-link to="/my_appeals">Техподдержка</router-link>
+            <router-link to="/my_appeals" class="routerLink">Техподдержка</router-link>
           </a>
-        </li>
-        <li class="nav-link">
-          <router-link to="/faq">FAQ</router-link>
         </li>
       </ul>
     </div>
@@ -41,4 +38,13 @@ a {
   color: white;
   text-decoration: none; /* Отменяем подчеркивание у ссылки */
 }
+
+a:hover {
+color: #4f73e8; /* Цвет ссылки при наведении */
+}
+
+a:focus {
+  outline: none;
+}
+
 </style>
