@@ -1,40 +1,28 @@
 <template>
-  <div class="container col-xxl-8 px-2 py-2 bg-white">
-    <h2 class="benefits__title">
-      <h2>Дневник эмоций за {{date}}</h2>
-      <form>
-        <h2>Эмоции</h2>
-        <li v-for="emotion in emotions">
-          <div class="card mb-3 shadow-lg ">
-            <div class="card-body">
-              <ul class="diary__title">
-                <h4>{{ emotion }}</h4>
-              </ul>
-            </div>
-          </div>
+  <div class="container col-xxl-8 px-2 py-2 cursor bg-white">
+    <h1 style="text-align: center">Дневник эмоций за {{ date }}</h1>
+    <form>
+      <h3>Эмоции:</h3>
+      <li v-for="emotion in emotions">
+        <ul>
+          <p style="text-align: left; font-weight: normal">{{ emotion }}</p>
+        </ul>
+      </li>
+      <h3>Действия:</h3>
+      <li v-for="action in actions">
+        <ul>
+          <p style="text-align: left; font-weight: normal">{{ action }}</p>
+        </ul>
+      </li>
+      <div class="buttons">
+        <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
+          <h3 style="text-align: left">Оценка дня:</h3>
+          <p style="text-align: left; margin-left: 76px"> {{ day_rate }} из 5 баллов</p>
+          <router-link class="btn btn-outline-dark text-center" to="/viewing_diary_emotions">Вернуться
+          </router-link>
         </li>
-        <h2>Действия</h2>
-        <li v-for="action in actions">
-          <div class="card mb-3 shadow-lg ">
-            <div class="card-body">
-              <ul class="diary__title">
-                <h4>{{ action }}</h4>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <div class="buttons">
-          <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
-            <h2>Оценка дня: {{day_rate}} из 5 баллов</h2>
-
-            <a class="w-100 btn btn btn-secondary text-light " style="color: white !important">
-
-              <router-link to="/viewing_diary_emotions">Вернуться</router-link>
-            </a>
-          </li>
-        </div>
-      </form>
-    </h2>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -51,7 +39,7 @@ export default {
   }),
   async created() {
 // GET request using axios with async/await// исправить в зависисмости от url
-    const response = await axios.get("http://127.0.0.1:8000/emotion_diaries/" + this.$route.params.id);
+    const response = await axios.get("https://eternal-awareness.herokuapp.com/emotion_diaries/" + this.$route.params.id);
     let emotions = response.data["emotions"];
     emotions = emotions.filter(function (value, index, array) {
       return array.indexOf(value) === index;
@@ -81,10 +69,12 @@ textarea {
   height: 200px; /* Высота */
   box-sizing: border-box; /* Алгоритм расчёта ширины */
   font-size: 14px; /* Размер шрифта */
+  resize: none;
+
 }
 
 h2 {
-  text-align: center
+  text-align: left;
 }
 
 li {
@@ -95,12 +85,22 @@ a {
   text-decoration: none; /* Убираем подчёркивание */
 }
 
-h4 {
+h3 {
   margin-left: 30px;
 }
+
+ul {
+  display: list-item;
+  list-style-type: "🤯";
+  margin-left: 100px;
+  padding-inline-start: 1ch;
+}
+
+.cursor {
+  cursor: default;
+}
+
 </style>
-No file chosen
-Ещё
 
 
 

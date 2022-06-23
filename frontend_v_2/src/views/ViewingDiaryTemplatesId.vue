@@ -1,24 +1,17 @@
 <template>
-  <div class="container col-xxl-8 px-2 py-2 bg-white">
-    <h2 class="benefits__title">
-      <h2>Дневник по шаблону</h2>
+  <div class="container col-xxl-8 px-2 py-2 cursor bg-white">
       <form>
-        <h2 class="benefits__title_theme_templates">
+        <h2 class="ic3">
           {{ theme }}
         </h2>
-        <div class="input-field">
+        <div class="input-field ic1">
           <textarea disabled=""> {{ answer }}</textarea>
         </div>
-        <div class="buttons">
-          <li class="nav-item me-2 mb-2 mb-lg-0 text-center">
-            <a class="w-100 btn btn btn-secondary text-light " style="color: white !important">
-              <router-link to="/viewing_diary_templates">Вернуться</router-link>
-            </a>
-          </li>
+        <div class="buttons ic1">
+              <router-link class="btn btn-outline-dark text-center" to="/viewing_diary_templates">Вернуться</router-link>
         </div>
       </form>
 
-    </h2>
   </div>
 </template>
 
@@ -33,7 +26,7 @@ export default {
   }),
   async created() {
 // GET request using axios with async/await// исправить в зависисмости от url
-    const response = await axios.get("http://127.0.0.1:8000/template_diaries/"+this.$route.params.id);
+    const response = await axios.get("https://eternal-awareness.herokuapp.com/template_diaries/"+this.$route.params.id);
     this.theme = response.data["theme"];
     this.answer = response.data["answer"];
     console.log(this.answer)
@@ -50,7 +43,8 @@ textarea {
   width: 100%; /* Ширина */
   height: 200px; /* Высота */
   box-sizing: border-box; /* Алгоритм расчёта ширины */
-  font-size: 14px; /* Размер шрифта */
+  font-size: 18px; /* Размер шрифта */
+  resize: none;
 }
 
 h2 {
@@ -64,4 +58,17 @@ li {
 a {
   text-decoration: none; /* Убираем подчёркивание */
 }
+
+.ic3 {
+  margin-top: 30px;
+}
+
+.ic1 {
+  margin-top: 50px;
+}
+
+.cursor {
+  cursor: default;
+}
+
 </style>
