@@ -7,8 +7,7 @@ export default createStore({
     },
     getters: {
         loggedIn(state) {
-            // return the truthiness or the falseness of the value
-            return !!state.user
+            return !!state.user || localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).token !== null
         }
     },
     mutations: {
@@ -25,11 +24,13 @@ export default createStore({
             }`
         },
         CLEAR_USER_DATA() {
-            // state.user = userData
+            // state.user = null
             localStorage.removeItem('user')
             // axios.defaults.headers.common['Authorization'] = null
             // .reload is a more scalable solution as our application grows
             // il reloads the current page, it forces a refresh of our page
+
+            console.log("h2131")
             location.reload()
         }
     },
@@ -43,11 +44,17 @@ export default createStore({
         },
         login({commit}, credentials) {
             return axios
-                .post('http://127.0.0.1:8000/login', credentials)
+                .post('https://eternal-awareness.herokuapp.com/login', credentials)
                 .then(({data}) => {
-                    console.log('hello')
-                    commit('SET_USER_DATA', data)
+                    if (data['code'] !== 417) {
+                        commit('SET_USER_DATA', data)
+                    } else {
+                        return data['code']
+                    }
                 })
+        },
+        logout({commit}) {
+            return commit('CLEAR_USER_DATA')
         }
     },
     modules: {}
