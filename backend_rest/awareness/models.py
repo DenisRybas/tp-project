@@ -5,7 +5,7 @@ from flask import current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from sqlalchemy import types
 
-from backend_rest.awareness.app import db, app
+from awareness.app import db, app
 
 
 class User(db.Model):
