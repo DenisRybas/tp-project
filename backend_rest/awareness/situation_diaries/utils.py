@@ -1,4 +1,4 @@
-from backend_rest.awareness.models import Situation
+from awareness.models import Situation
 
 
 def get_random_situation_id():

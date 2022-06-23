@@ -1,4 +1,4 @@
-from backend_rest.awareness.models import Theme
+from awareness.models import Theme
 
 
 def get_random_theme_id():
