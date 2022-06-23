@@ -29,26 +29,26 @@ CORS(app)
 def create_app():
     db.init_app(app)
 
-    from backend_rest.awareness.users.routes import users_blueprint
+    from awareness.users.routes import users_blueprint
 
     # from awareness.diaries.routes import diaries
-    from backend_rest.awareness.template_diaries.routes import (
+    from awareness.template_diaries.routes import (
         template_diaries_blueprint,
     )
 
-    from backend_rest.awareness.situation_diaries.routes import (
+    from awareness.situation_diaries.routes import (
         situation_diaries_blueprint,
     )
 
-    from backend_rest.awareness.emotion_diaries.routes import (
+    from awareness.emotion_diaries.routes import (
         emotion_diaries_blueprint,
     )
 
-    from backend_rest.awareness.habit_tracker.routes import (
+    from awareness.habit_tracker.routes import (
         habit_tracker_blueprint,
     )
 
-    from backend_rest.awareness.technical_support.routes import (
+    from awareness.technical_support.routes import (
         technical_support_blueprint,
     )
 
