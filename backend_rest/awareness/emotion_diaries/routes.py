@@ -2,9 +2,10 @@ from datetime import datetime
 
 from flask import Blueprint, request, jsonify
 
-from backend_rest.awareness.app import db
-from backend_rest.awareness.models import UserEmotion, Emotion, User, Action
-from backend_rest.awareness.users.routes import token_required
+# from awareness.users.routes import token_required
+from awareness.app import db
+from awareness.models import UserEmotion, Emotion, Action, User
+from awareness.users.routes import token_required
 
 emotion_diaries_blueprint = Blueprint("emotion_diaries", __name__)
 
