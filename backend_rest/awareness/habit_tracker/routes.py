@@ -1,12 +1,8 @@
 from flask import Blueprint, request, jsonify
 
-from backend_rest.awareness.app import db
-from backend_rest.awareness.models import (
-    UserSituationDiary,
-    User,
-    HabitTracker,
-)
-from backend_rest.awareness.users.routes import token_required
+from awareness.app import db
+from awareness.models import HabitTracker, User
+from awareness.users.routes import token_required
 
 habit_tracker_blueprint = Blueprint("habit_tracker", __name__)
 
@@ -79,9 +75,13 @@ def get_habit_tracker(habit_id):
 
     habit = HabitTracker.query.filter_by(id=habit_id, user_id=user_id).first()
 
+    year = str(habit.date_started.year)
+    month = str(habit.date_started.month)
+    day = str(habit.date_started.day)
+
     return jsonify(
         habit_name=habit.habit_name,
-        date_started=habit.date_started,
+        date_started=year + "." + month + "." + day,
         code=200,
     )
 
@@ -96,9 +96,9 @@ def get_all_habit_trackers():
 
     habits = []
     for habit in habit_query:
-        year = str(habit_query.date_started.year)
-        month = str(habit_query.date_started.month)
-        day = str(habit_query.date_started.day)
+        year = str(habit.date_started.year)
+        month = str(habit.date_started.month)
+        day = str(habit.date_started.day)
         habits.append(
             {
                 "habit_id": habit.id,
