@@ -1,12 +1,12 @@
 from flask import Blueprint, jsonify, request
 
-from backend_rest.awareness.app import db
-from backend_rest.awareness.models import (
+from awareness.app import db
+from awareness.models import (
     User,
     TechnicalSupportTicket,
     TechnicalSupportChat,
 )
-from backend_rest.awareness.users.routes import token_required
+from awareness.users.routes import token_required
 
 technical_support_blueprint = Blueprint("technical_support", __name__)
 
