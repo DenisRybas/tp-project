@@ -234,6 +234,8 @@ a:focus {
 a:active,
 a:hover {
     outline: 0;
+    color: deepskyblue; /* Цвет ссылки при наведении */
+text-decoration: underline; /* Добавляем подчёркивание */
 }
 
 

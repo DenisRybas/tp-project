@@ -140,6 +140,8 @@ a:focus {
 a:active,
 a:hover {
     outline: 0;
+    color: deepskyblue; /* Цвет ссылки при наведении */
+text-decoration: underline; /* Добавляем подчёркивание */
 }
 
 /**
@@ -620,6 +622,7 @@ img {
 
 .benefits__card-thumb {
     display: block;
+    -webkit-user-drag: none;
 }
 
 .benefits__card-title {
@@ -772,6 +775,8 @@ img {
     margin: 0 auto;
     text-decoration: none; /* Убираем подчёркивание */
 }
+
+
 
 /**/
 /* контейнер */
