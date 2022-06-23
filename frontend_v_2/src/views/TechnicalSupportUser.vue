@@ -1,27 +1,23 @@
 <template>
-  <div class="container col-xxl-8 px-2 py-2 bg-white" @submit.prevent="submitHandler">
-    <h2 class="benefits__title">
-      Создание запроса
+  <div class="container col-xxl-8 px-2 py-2 bg-white cursor" @submit.prevent="submitHandler">
+    <form>
+      <h2 class="ic1">
+        Введите тему:
+      </h2>
+      <div class="ic1">
+        <textarea class="theme" v-model.trim="title" placeholder="введите тему" required></textarea>
+      </div>
+      <h2 class="ic1">
+        Введите содержиние:
+      </h2>
+      <div class="ic1">
+        <textarea v-model.trim="content" placeholder="введите содержание" required></textarea>
+      </div>
+      <div class="buttons ic3">
+        <button type="submit" class="floating-button">Отправить</button>
+      </div>
+    </form>
 
-      <form>
-        <h2 class="benefits__title_theme_templates">
-          Введите тему:
-        </h2>
-        <div class="input-field">
-          <textarea class="theme" v-model.trim="title" placeholder="введите тему"></textarea>
-        </div>
-        <h2 class="benefits__title_theme_templates">
-          Введите содержиние:
-        </h2>
-        <div class="input-field">
-          <textarea v-model.trim="content" placeholder="введите содержание"></textarea>
-        </div>
-        <div class="buttons">
-          <button type="submit" class="floating-button">Отправить</button>
-        </div>
-      </form>
-
-    </h2>
   </div>
 </template>
 
@@ -40,7 +36,7 @@ export default {
         title: this.title,
         content: this.content
       }
-      axios.post('/technical_support_tickets/new', formData)// исправить в зависисмости от url
+      await axios.post('https://eternal-awareness.herokuapp.com/technical_support_tickets/new', formData)// исправить в зависисмости от url
           .then(function (response) {
             console.log(response);
           })
@@ -63,7 +59,8 @@ textarea {
   width: 100%; /* Ширина */
   height: 200px; /* Высота */
   box-sizing: border-box; /* Алгоритм расчёта ширины */
-  font-size: 14px; /* Размер шрифта */
+  font-size: 18px; /* Размер шрифта */
+  resize: none;
 }
 
 textarea.theme {
@@ -71,12 +68,24 @@ textarea.theme {
   border: 2px solid #d0d0d0; /* Параметры рамки */
   padding: 10px; /* Поля */
   width: 100%; /* Ширина */
-  height: 50px; /* Высота */
+  height: 70px; /* Высота */
   box-sizing: border-box; /* Алгоритм расчёта ширины */
-  font-size: 16px; /* Размер шрифта */
+  font-size: 18px; /* Размер шрифта */
+}
+
+.cursor {
+  cursor: default;
 }
 
 h2 {
   text-align: center
+}
+
+.ic3 {
+  margin-top: 30px;
+}
+
+.ic1 {
+  margin-top: 50px;
 }
 </style>
