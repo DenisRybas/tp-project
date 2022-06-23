@@ -6,9 +6,9 @@ from flask import current_app
 from flask import url_for, Blueprint, request, jsonify, session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from backend_rest.awareness.app import db, app
-from backend_rest.awareness.models import User
-from backend_rest.awareness.users.email import SmtpEmail
+from awareness.models import User
+from awareness.users.email import SmtpEmail
+from awareness.app import db, app
 
 users_blueprint = Blueprint("users", __name__)
 
@@ -77,6 +77,7 @@ def register():
                 email=user_json["email"],
                 password=generate_password_hash(user_json["password"]),
                 subscribed_on_daily_phrase=sub,
+                is_confirmed=True,
             )
             db.session.add(user)
             db.session.commit()
@@ -131,7 +132,7 @@ def login():
                     "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30),
                 },
                 app.config["SECRET_KEY"],
-            )
+            ).decode('UTF-8')
 
             print(token)
             session["logged_in"] = True
