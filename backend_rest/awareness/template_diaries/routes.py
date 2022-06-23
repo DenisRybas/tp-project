@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 
-from backend_rest.awareness.app import db
-from backend_rest.awareness.models import UserTemplateDiary, Theme, User
-from backend_rest.awareness.template_diaries.utils import get_random_theme_id
-from backend_rest.awareness.users.routes import token_required
+from awareness.app import db
+from awareness.models import UserTemplateDiary, Theme, User
+from awareness.template_diaries.utils import get_random_theme_id
+from awareness.users.routes import token_required
 
 template_diaries_blueprint = Blueprint("template_diaries", __name__)
 
