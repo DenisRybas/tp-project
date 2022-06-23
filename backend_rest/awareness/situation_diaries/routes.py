@@ -1,14 +1,15 @@
 from flask import Blueprint, request, jsonify
 
-from backend_rest.awareness.app import db
-from backend_rest.awareness.models import (
+from awareness.app import db
+from awareness.models import (
     UserSituationDiary,
     Situation,
     User,
     SituationAnswer,
 )
-from backend_rest.awareness.situation_diaries.utils import get_random_situation_id
-from backend_rest.awareness.users.routes import token_required
+from awareness.situation_diaries.utils import get_random_situation_id
+from awareness.users.routes import token_required
+
 
 situation_diaries_blueprint = Blueprint("situation_diaries", __name__)
 
@@ -98,7 +99,7 @@ def create_situation_diary():
             situation_to_json.append(situation_obj)
 
         return jsonify(
-            situation=situation_to_json, preferred_answer=preferred_answer, code=200
+            situation=situation_to_json, preferred_answer=preferred_answer, situation_name=situation.situation, code=200
         )
     return None
 
